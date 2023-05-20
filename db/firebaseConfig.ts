@@ -1,5 +1,5 @@
-
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -8,8 +8,9 @@ const firebaseConfig = {
   projectId: "practica-usuarios-crud-bcda0",
   storageBucket: "practica-usuarios-crud-bcda0.appspot.com",
   messagingSenderId: "142084262457",
-  appId: "1:142084262457:web:e3ff4f670a6943dd5adbe8"
+  appId: "1:142084262457:web:e3ff4f670a6943dd5adbe8",
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);

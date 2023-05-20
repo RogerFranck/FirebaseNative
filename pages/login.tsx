@@ -3,15 +3,32 @@ import { View, TextInput, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
 import { LogoImg } from "../const/img";
+import useForm from "../hooks/useForm";
+
+const defaultForm = { email: "", password: "" };
 
 export default function Login() {
   const { onSignIn } = useAuth();
+  const { state, handleChangue } = useForm(defaultForm);
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: LogoImg }} />
-      <TextInput placeholder="Email" style={styles.input} />
-      <TextInput placeholder="Password" style={styles.input} />
-      <Button mode="contained" onPress={onSignIn} style={styles.button}>
+      <TextInput
+        placeholder="Email"
+        style={styles.input}
+        onChangeText={(e) => handleChangue("email", e)}
+      />
+      <TextInput
+        placeholder="Password"
+        secureTextEntry
+        style={styles.input}
+        onChangeText={(e) => handleChangue("password", e)}
+      />
+      <Button
+        mode="contained"
+        onPress={() => onSignIn(state.email, state.password)}
+        style={styles.button}
+      >
         Login
       </Button>
     </View>
