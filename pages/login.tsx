@@ -4,14 +4,20 @@ import { Button } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
 import { LogoImg } from "../const/img";
 
-export default function Login() {
+export default function Login({ navigation }: any) {
   const { onSignIn } = useAuth();
+
+  const temporalOverride = () => {
+    onSignIn()
+    navigation.navigate('MainPage')
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: LogoImg }} />
       <TextInput placeholder="Email" style={styles.input} />
       <TextInput placeholder="Password" style={styles.input} />
-      <Button mode="contained" onPress={onSignIn} style={styles.button}>
+      <Button mode="contained" onPress={temporalOverride} style={styles.button}>
         Login
       </Button>
     </View>
