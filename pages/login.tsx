@@ -7,8 +7,8 @@ import useForm from "../hooks/useForm";
 
 const defaultForm = { email: "", password: "" };
 
-export default function Login() {
-  const { onSignIn } = useAuth();
+export default function Login({ navigation }: any) {
+  const { onSignIn } = useAuth(navigation);
   const { state, handleChangue } = useForm(defaultForm);
   return (
     <View style={styles.container}>

@@ -2,10 +2,10 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../db/firebaseConfig";
 import { Alert } from "react-native";
 
-export default function useAuth() {
+export default function useAuth(navigation: any) {
   const onSignIn = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then((user) => console.log(user))
+      .then((user) => navigation.navigate("MainPage"))
       .catch((error) => Alert.alert("Error", error.message));
   };
   const onSignOut = () => {};
