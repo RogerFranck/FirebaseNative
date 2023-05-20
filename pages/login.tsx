@@ -1,15 +1,16 @@
-import { TextInput } from "@react-native-material/core";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
+import { LogoImg } from "../const/img";
 
 export default function Login() {
   const { onSignIn } = useAuth();
   return (
     <View style={styles.container}>
-      <TextInput label="Email" style={styles.input} />
-      <TextInput label="Password" secureTextEntry style={styles.input} />
+      <Image style={styles.image} source={{ uri: LogoImg }} />
+      <TextInput placeholder="Email" style={styles.input} />
+      <TextInput placeholder="Password" style={styles.input} />
       <Button mode="contained" onPress={onSignIn} style={styles.button}>
         Login
       </Button>
@@ -22,13 +23,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 36,
+    backgroundColor: "#F0F1F3",
   },
   input: {
     marginBottom: 16,
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "white",
+    borderRadius: 8,
+    padding: 20,
   },
   button: {
     marginTop: 16,
-    backgroundColor: "#2F80ED",
+    borderRadius: 8,
+    padding: 8,
+    backgroundColor: "black",
+  },
+  image: {
+    width: 200,
+    height: 100,
+    alignSelf: "center",
+    marginBottom: 50,
+    padding: 10,
+    borderRadius: 8,
   },
 });
