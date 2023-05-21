@@ -70,7 +70,7 @@ export default function Products({ navigation }: any) {
         size="small"
         title="Create"
         icon={{ name: "add", color: "#fff" }}
-        onPress={() => navigation.Navigate("ProductForm")}
+        onPress={() => navigation.navigate("ProductForm")}
         color="black"
       />
     </View>

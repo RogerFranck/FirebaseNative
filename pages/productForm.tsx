@@ -1,34 +1,53 @@
 import React from "react";
 import { View, TextInput, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
-import useAuth from "../hooks/useAuth";
-import { LogoImg } from "../const/img";
 import useForm from "../hooks/useForm";
 
-const defaultForm = { email: "rogeralmeydaramos@outlook.com", password: "123456" };
+const defaultForm = { 
+  nombre: "", 
+  precio_venta: 0,
+  precio_compra: 0,
+  unidades: 0,
+  imagen: "",
+};
 
-export default function Login({ navigation }: any) {
+export default function ProductForm({ navigation }: any) {
 
-    const handleChangue = (field:string, object:any) => {
-        console.log('change:', field, object)
-    }
+  const { state, handleChangue } = useForm(defaultForm);
   
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Email"
+        placeholder="Nombre"
         style={styles.input}
-        onChangeText={(e) => handleChangue("email", e)}
+        onChangeText={(e) => handleChangue("nombre", e)}
       />
       <TextInput
-        placeholder="Password"
-        secureTextEntry
+        placeholder="Precio Venta"
+        keyboardType='numeric'
         style={styles.input}
-        onChangeText={(e) => handleChangue("password", e)}
+        onChangeText={(e) => handleChangue("precio_venta", e)}
+      />
+      <TextInput
+        placeholder="Precio Compra"
+        keyboardType='numeric'
+        style={styles.input}
+        onChangeText={(e) => handleChangue("precio_compra", e)}
+      />
+      <TextInput
+        placeholder="Unidades"
+        keyboardType='numeric'
+        style={styles.input}
+        onChangeText={(e) => handleChangue("unidades", e)}
+      />
+      <TextInput
+        placeholder="Imagen"
+        style={styles.input}
+        onChangeText={(e) => handleChangue("imagen", e)}
       />
       <Button
         mode="contained"
-        onPress={() => console.log('Guaradar')}
+        onPress={() => console.log('Guardar')}
         style={styles.button}
       >
         Save
