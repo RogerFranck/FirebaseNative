@@ -7,7 +7,7 @@ import { Grid, Archive, CheckSquare } from "react-native-feather";
 
 const Tab = createMaterialBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs({ navigation }: any) {
     return (
         <Tab.Navigator
             activeColor="#004170"

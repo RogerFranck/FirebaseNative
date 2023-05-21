@@ -8,11 +8,13 @@ import useForm from "../hooks/useForm";
 const defaultForm = { email: "rogeralmeydaramos@outlook.com", password: "123456" };
 
 export default function Login({ navigation }: any) {
-  const { onSignIn } = useAuth(navigation);
-  const { state, handleChangue } = useForm(defaultForm);
+
+    const handleChangue = (field:string, object:any) => {
+        console.log('change:', field, object)
+    }
+  
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: LogoImg }} />
       <TextInput
         placeholder="Email"
         style={styles.input}
@@ -26,10 +28,10 @@ export default function Login({ navigation }: any) {
       />
       <Button
         mode="contained"
-        onPress={() => onSignIn(state.email, state.password)}
+        onPress={() => console.log('Guaradar')}
         style={styles.button}
       >
-        Login
+        Save
       </Button>
     </View>
   );

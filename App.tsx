@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./pages/login";
+import ProductForm from "./pages/productForm";
 import BottomNavigator from "./components/bottomNavigator";
 
 export default function App() {
@@ -16,6 +17,11 @@ export default function App() {
         <Stack.Screen
           name="MainPage"
           component={BottomNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProductForm"
+          component={ProductForm}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
