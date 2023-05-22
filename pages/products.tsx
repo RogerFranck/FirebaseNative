@@ -1,21 +1,57 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
-import { Text, Card, FAB } from '@rneui/themed';
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { Text, Card, FAB, Dialog } from '@rneui/themed';
 import useGetProductData from "../hooks/useGetProductData";
 import { backgroundPage } from '../const/color';
+import { image_placeholder } from '../const/img';
 import { AlignJustify, Edit, Trash, PlusCircle } from "react-native-feather";
+import deleteData from "../hooks/deleteData";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function Products({ navigation }: any) {
+  const isFocused = useIsFocused();
+  const [forceUpdate, setforceUpdate] = useState(true);
+
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [productSelected, setproductSelected] = useState({});
 
   const { products, getProducts } = useGetProductData()
 
+  const confirmDelete = (product: object) => {
+    setDialogVisible(true);
+    setproductSelected(product)
+  };
+
+  const cancellDelete = () => {
+    setDialogVisible(false);
+    setproductSelected({})
+  };
+
+  const deleteProduct = () => {
+    const { id }: any = productSelected;
+    deleteData(id, "productos")
+    setproductSelected({});
+    setDialogVisible(false);
+    setforceUpdate(!forceUpdate)
+  };
+
   useEffect(() => {
     getProducts()
-  }, [])
+  }, [isFocused, forceUpdate])
 
 
   return (
     <View style={styles.container}>
+      <Dialog
+        isVisible={dialogVisible}
+        onBackdropPress={() => cancellDelete()}
+      >
+        <Dialog.Title title="¿Estás seguro?" />
+        <Text>Los datos serán borrados permanentemente</Text>
+        <Dialog.Actions>
+          <Dialog.Button title="Borrar" onPress={() => deleteProduct()} />
+        </Dialog.Actions>
+      </Dialog>
       <ScrollView style={styles.scrollview}>
         {
           products.map(({ imagen, nombre, precio_compra, precio_venta, unidades, id }) => (
@@ -25,7 +61,7 @@ export default function Products({ navigation }: any) {
               <Card.Image
                 style={styles.image}
                 source={{
-                  uri: imagen,
+                  uri: imagen || image_placeholder,
                 }}
               />
               <Card.Title style={styles.title}>
@@ -51,10 +87,10 @@ export default function Products({ navigation }: any) {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.secButton}>
                   <View style={[styles.button]}>
-                    <Edit style={styles.icon} stroke={'white'} />
+                    <Edit style={styles.icon} stroke={'white'} onPress={() => navigation.navigate("ProductForm", {product: { imagen, nombre, precio_compra, precio_venta, unidades, id }})} />
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.secButton}>
+                <TouchableOpacity style={styles.secButton} onPress={() => confirmDelete({ imagen, nombre, precio_compra, precio_venta, unidades, id })}>
                   <View style={[styles.button]}>
                     <Trash style={styles.icon} stroke={'white'} />
                   </View>
@@ -63,6 +99,10 @@ export default function Products({ navigation }: any) {
             </Card>
           ))
         }
+        <View style={{
+          backgroundColor: 'blue',
+          margin: 40
+        }} />
       </ScrollView>
       <FAB
         style={{ width: "40%" }}
