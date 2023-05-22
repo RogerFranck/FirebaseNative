@@ -2,7 +2,7 @@ import React from "react";
 import { View, TextInput, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
 import useForm from "../hooks/useForm";
-import postData from "../hooks/postData";
+import postData from "../Service/products/handlePost";
 
 const defaultForm = {
   nombre: "",
@@ -13,23 +13,27 @@ const defaultForm = {
 };
 
 export default function ProductForm({ route, navigation }: any) {
-
   const setProduct = () => {
     if (route?.params) {
       const { product } = route?.params;
-      return product
+      return product;
     }
     return defaultForm;
-  }
+  };
 
   const { state, handleChangue } = useForm(setProduct());
 
   const verifyAndSend = () => {
     const { precio_compra, precio_venta } = state;
-    console.log('Verify:', precio_venta >= precio_compra, precio_venta, precio_compra)
+    console.log(
+      "Verify:",
+      precio_venta >= precio_compra,
+      precio_venta,
+      precio_compra
+    );
     if (Number(precio_venta) >= Number(precio_compra)) {
-      postData(state, 'productos')
-      navigation.goBack()
+      postData(state, "productos");
+      navigation.goBack();
     }
   };
 
@@ -44,21 +48,21 @@ export default function ProductForm({ route, navigation }: any) {
       <TextInput
         value={state.precio_venta.toString()}
         placeholder="Precio Venta"
-        keyboardType='numeric'
+        keyboardType="numeric"
         style={styles.input}
         onChangeText={(e) => handleChangue("precio_venta", e)}
       />
       <TextInput
         value={state.precio_compra.toString()}
         placeholder="Precio Compra"
-        keyboardType='numeric'
+        keyboardType="numeric"
         style={styles.input}
         onChangeText={(e) => handleChangue("precio_compra", e)}
       />
       <TextInput
         value={state.unidades.toString()}
         placeholder="Unidades"
-        keyboardType='numeric'
+        keyboardType="numeric"
         style={styles.input}
         onChangeText={(e) => handleChangue("unidades", e)}
       />

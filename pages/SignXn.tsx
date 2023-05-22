@@ -1,36 +1,49 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Image } from "react-native";
-import { Button } from "react-native-paper";
+import { View, TextInput, StyleSheet, Image, Text } from "react-native";
 import useAuth from "../hooks/useAuth";
 import { LogoImg } from "../const/img";
 import useForm from "../hooks/useForm";
+import ButtonControl from "../components/common/buttonControl";
 
-const defaultForm = { email: "rogeralmeydaramos@outlook.com", password: "123456" };
+const defaultForm = {
+  email: "rogeralmeydaramos@outlook.com",
+  password: "123456",
+};
 
 export default function Login({ navigation }: any) {
-  const { onSignIn } = useAuth(navigation);
+  const { onSignIn, onSignUp, onSwitchAuth, isSignUp } = useAuth(navigation);
   const { state, handleChangue } = useForm(defaultForm);
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: LogoImg }} />
+      <Text style={styles.principalText}>
+        {isSignUp ? "Sign up" : "Sign in"}
+      </Text>
       <TextInput
         placeholder="Email"
         style={styles.input}
         onChangeText={(e) => handleChangue("email", e)}
+        value={state.email}
       />
       <TextInput
         placeholder="Password"
         secureTextEntry
         style={styles.input}
         onChangeText={(e) => handleChangue("password", e)}
+        value={state.password}
       />
-      <Button
-        mode="contained"
-        onPress={() => onSignIn(state.email, state.password)}
-        style={styles.button}
+      <ButtonControl
+        onPress={() =>
+          isSignUp
+            ? onSignUp(state.email, state.password)
+            : onSignIn(state.email, state.password)
+        }
       >
-        Login
-      </Button>
+        {isSignUp ? "Sign up" : "Sign in"}
+      </ButtonControl>
+      <ButtonControl onPress={onSwitchAuth} isSecundary>
+        {!isSignUp ? "Sign up" : "Sign in"}
+      </ButtonControl>
     </View>
   );
 }
@@ -48,18 +61,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 20,
   },
-  button: {
-    marginTop: 16,
-    borderRadius: 8,
-    padding: 8,
-    backgroundColor: "black",
-  },
   image: {
     width: 200,
     height: 100,
     alignSelf: "center",
-    marginBottom: 50,
+    marginBottom: 40,
     padding: 10,
     borderRadius: 8,
+  },
+  principalText: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    fontSize: 30,
+    marginBottom: 35,
   },
 });
