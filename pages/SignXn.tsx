@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, TextInput, StyleSheet, Image, Text } from "react-native";
 import useAuth from "../hooks/useAuth";
 import { LogoImg } from "../const/img";
 import useForm from "../hooks/useForm";
 import ButtonControl from "../components/common/buttonControl";
+import useGetUser from "../hooks/useGetUser";
 
 const defaultForm = {
   email: "rogeralmeydaramos@outlook.com",
@@ -13,6 +14,12 @@ const defaultForm = {
 export default function Login({ navigation }: any) {
   const { onSignIn, onSignUp, onSwitchAuth, isSignUp } = useAuth(navigation);
   const { state, handleChangue } = useForm(defaultForm);
+  const { user } = useGetUser();
+
+  useEffect(() => {
+    if (user) navigation.navigate("MainPage");
+  }, []);
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: LogoImg }} />
