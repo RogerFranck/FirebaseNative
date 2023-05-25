@@ -88,7 +88,7 @@ export default function Service({ navigation }: any) {
         size="small"
         title="Create"
         icon={{ name: "add", color: "#fff" }}
-        onPress={() => navigation.navigate("ProductForm")}
+        onPress={() => navigation.navigate("ServiceForm")}
         color="black"
       />
     </View>
