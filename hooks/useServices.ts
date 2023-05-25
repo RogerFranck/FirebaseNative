@@ -4,40 +4,40 @@ import useGetProductData from "../Service/products/useGet";
 import handleDelete from "../Service/products/handleDelete";
 import { GeneralContext } from "../context/generalContext";
 
-export default function useProducts() {
+export default function useServices() {
   const { user } = useContext(GeneralContext);
   const isFocused = useIsFocused();
   const [forceUpdate, setforceUpdate] = useState(true);
 
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [productSelected, setproductSelected] = useState({});
+  const [serviceSelected, setServiceSelected] = useState({});
 
   const { products, getProducts } = useGetProductData();
 
   const confirmDelete = (product: object) => {
     setDialogVisible(true);
-    setproductSelected(product);
+    setServiceSelected(product);
   };
 
   const cancellDelete = () => {
     setDialogVisible(false);
-    setproductSelected({});
+    setServiceSelected({});
   };
 
-  const deleteProduct = () => {
-    const { id }: any = productSelected;
-    handleDelete(id, "productos");
-    setproductSelected({});
+  const deleteService = () => {
+    const { id }: any = serviceSelected;
+    handleDelete(id, "services");
+    setServiceSelected({});
     setDialogVisible(false);
     setforceUpdate(!forceUpdate);
   };
 
   useEffect(() => {
-    getProducts("productos");
+    getProducts("services");
   }, [isFocused, forceUpdate]);
 
   return {
-    deleteProduct,
+    deleteService,
     cancellDelete,
     confirmDelete,
     dialogVisible,

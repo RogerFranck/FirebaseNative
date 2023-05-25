@@ -5,11 +5,11 @@ import { db } from "../../db/firebaseConfig";
 export default function useGetProductData() {
   const [products, setproducts] = useState([]);
 
-  const getProducts = async () => {
+  const getProducts = async (nameCollection : string) => {
     try {
-      const querySnapshot = await getDocs(collection(db, "productos"));
+      const querySnapshot = await getDocs(collection(db, nameCollection));
       const products: any = [];
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc : any) => {
         const data = doc.data();
         products.push({ ...data, id: doc.id });
       });

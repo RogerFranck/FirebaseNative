@@ -48,3 +48,15 @@ export const onValidFormProduct = ({nombre, precio_venta, precio_compra, unidade
   }
   return true;
 };
+
+export const onValidFormServices = ({nombre, precio_venta, costo_servicio}:any) => {
+  if (!isValidPrice(precio_venta, costo_servicio)) {
+    Alert.alert("Error", "The Selling Price must be higher than the Service Cost");
+    return false;
+  }
+  if (!isRequired([nombre, precio_venta, costo_servicio,])) {
+    Alert.alert("Error", "Some fields are empty");
+    return false;
+  }
+  return true;
+};
