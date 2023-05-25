@@ -2,6 +2,7 @@ import React from "react";
 import { View, TextInput, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
 import useForm from "../hooks/useForm";
+import { onValidFormProduct } from "../utils/isValidForm";
 import postData from "../Service/products/handlePost";
 
 const defaultForm = {
@@ -24,17 +25,21 @@ export default function ProductForm({ route, navigation }: any) {
   const { state, handleChangue } = useForm(setProduct());
 
   const verifyAndSend = () => {
-    const { precio_compra, precio_venta } = state;
-    console.log(
-      "Verify:",
-      precio_venta >= precio_compra,
-      precio_venta,
-      precio_compra
-    );
-    if (Number(precio_venta) >= Number(precio_compra)) {
+    if (onValidFormProduct(state)) {
       postData(state, "productos");
       navigation.goBack();
     }
+    // const { precio_compra, precio_venta } = state;
+    // console.log(
+    //   "Verify:",
+    //   precio_venta >= precio_compra,
+    //   precio_venta,
+    //   precio_compra
+    // );
+    // if (Number(precio_venta) >= Number(precio_compra)) {
+    //   postData(state, "productos");
+    //   navigation.goBack();
+    // }
   };
 
   return (
