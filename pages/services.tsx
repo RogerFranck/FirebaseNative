@@ -6,7 +6,7 @@ import { image_placeholder } from "../const/img";
 import { AlignJustify, Edit, Trash } from "react-native-feather";
 import useServices from "../hooks/useServices";
 
-export default function Products({ navigation }: any) {
+export default function Service({ navigation }: any) {
   const {
     deleteService,
     cancellDelete,
