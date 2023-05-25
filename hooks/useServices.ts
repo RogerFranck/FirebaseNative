@@ -26,14 +26,14 @@ export default function useServices() {
 
   const deleteService = () => {
     const { id }: any = serviceSelected;
-    handleDelete(id, "services");
+    handleDelete(id, "servicios");
     setServiceSelected({});
     setDialogVisible(false);
     setforceUpdate(!forceUpdate);
   };
 
   useEffect(() => {
-    getProducts("services");
+    getProducts("servicios");
   }, [isFocused, forceUpdate]);
 
   return {

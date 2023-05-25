@@ -38,18 +38,18 @@ export default function ServiceForm({ route, navigation }: any) {
         onChangeText={(e) => handleChangue("nombre", e)}
       />
       <TextInput
-        value={state.precio_venta.toString()}
+        value={state.precioVenta.toString()}
         placeholder="Precio Venta"
         keyboardType="numeric"
         style={styles.input}
-        onChangeText={(e) => handleChangue("precio_venta", e)}
+        onChangeText={(e) => handleChangue("precioVenta", e)}
       />
       <TextInput
-        value={state.costo_servicio.toString()}
+        value={state.costoServicio.toString()}
         placeholder="Costo servicio"
         keyboardType="numeric"
         style={styles.input}
-        onChangeText={(e) => handleChangue("costo_servicio", e)}
+        onChangeText={(e) => handleChangue("costoServicio", e)}
       />
       <Button
         mode="contained"

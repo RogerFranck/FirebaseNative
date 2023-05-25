@@ -25,11 +25,11 @@ export default function Service({ navigation }: any) {
       </Dialog>
       <ScrollView style={styles.scrollview}>
         {products.map(
-          ({ id, nombre, precioCompra, costoServicio }) => (
+          ({ id, nombre, precioVenta, costoServicio }) => (
             <Card key={id} containerStyle={styles.card}>
               <Card.Title style={styles.title}>{nombre}</Card.Title>
               <View style={styles.textContainer}>
-                <Text style={styles.text}>precio de venta: ${precioCompra}</Text>
+                <Text style={styles.text}>precio de venta: ${precioVenta}</Text>
                 <Text style={styles.text}>Costo de servicio: {costoServicio}</Text>
               </View>
               <View style={styles.buttonGroup}>
@@ -47,8 +47,9 @@ export default function Service({ navigation }: any) {
                       onPress={() =>
                         navigation.navigate("ServiceForm", {
                           product: {
+                            id,
                             nombre,
-                            precioCompra,
+                            precioVenta,
                             costoServicio,
                           },
                         })
@@ -61,7 +62,7 @@ export default function Service({ navigation }: any) {
                   onPress={() =>
                     confirmDelete({
                       nombre,
-                      precioCompra,
+                      precioVenta,
                       costoServicio,
                       id,
                     })
