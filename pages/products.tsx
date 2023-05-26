@@ -25,7 +25,7 @@ export default function Products({ navigation }: any) {
       </Dialog>
       <ScrollView style={styles.scrollview}>
         {products.map(
-          ({ imagen, nombre, precio_compra, precio_venta, unidades, id }) => (
+          ({ imagen, nombre, precio_compra, precioVenta, unidades, id }) => (
             <Card key={id} containerStyle={styles.card}>
               <Card.Image
                 style={styles.image}
@@ -35,15 +35,18 @@ export default function Products({ navigation }: any) {
               />
               <Card.Title style={styles.title}>{nombre}</Card.Title>
               <View style={styles.textContainer}>
-                <Text style={styles.text}>Precio Venta: ${precio_venta}</Text>
+                <Text style={styles.text}>Precio Venta: ${precioVenta}</Text>
                 <Text style={styles.text}>Precio Compra: ${precio_compra}</Text>
                 <Text style={styles.text}>Unidades: {unidades}</Text>
               </View>
               <View style={styles.buttonGroup}>
-                <TouchableOpacity style={styles.mainButton}>
+                <TouchableOpacity
+                  style={styles.mainButton}
+                  onPress={() => console.log("Hola")}
+                >
                   <View style={[styles.button]}>
                     <AlignJustify style={styles.icon} stroke={"white"} />
-                    <Text style={styles.buttonText}> Descripción</Text>
+                    <Text style={styles.buttonText}>Descripción</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.secButton}>
@@ -57,7 +60,7 @@ export default function Products({ navigation }: any) {
                             imagen,
                             nombre,
                             precio_compra,
-                            precio_venta,
+                            precioVenta,
                             unidades,
                             id,
                           },
@@ -73,7 +76,7 @@ export default function Products({ navigation }: any) {
                       imagen,
                       nombre,
                       precio_compra,
-                      precio_venta,
+                      precioVenta,
                       unidades,
                       id,
                     })

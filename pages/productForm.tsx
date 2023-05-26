@@ -7,7 +7,7 @@ import postData from "../Service/products/handlePost";
 
 const defaultForm = {
   nombre: "",
-  precio_venta: 0,
+  precioVenta: 0,
   precio_compra: 0,
   unidades: 0,
   imagen: "",
@@ -29,17 +29,6 @@ export default function ProductForm({ route, navigation }: any) {
       postData(state, "productos");
       navigation.goBack();
     }
-    // const { precio_compra, precio_venta } = state;
-    // console.log(
-    //   "Verify:",
-    //   precio_venta >= precio_compra,
-    //   precio_venta,
-    //   precio_compra
-    // );
-    // if (Number(precio_venta) >= Number(precio_compra)) {
-    //   postData(state, "productos");
-    //   navigation.goBack();
-    // }
   };
 
   return (
@@ -51,11 +40,11 @@ export default function ProductForm({ route, navigation }: any) {
         onChangeText={(e) => handleChangue("nombre", e)}
       />
       <TextInput
-        value={state.precio_venta.toString()}
+        value={state.precioVenta.toString()}
         placeholder="Precio Venta"
         keyboardType="numeric"
         style={styles.input}
-        onChangeText={(e) => handleChangue("precio_venta", e)}
+        onChangeText={(e) => handleChangue("precioVenta", e)}
       />
       <TextInput
         value={state.precio_compra.toString()}

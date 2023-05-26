@@ -5,6 +5,7 @@ import ProductForm from "./pages/productForm";
 import ServiceForm from "./pages/ServiceForm";
 import BottomNavigator from "./components/bottomNavigator";
 import GeneralState from "./context/generalState";
+import SalesForm from "./pages/salesForm";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -30,6 +31,11 @@ export default function App() {
           <Stack.Screen
             name="ServiceForm"
             component={ServiceForm}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SalesForm"
+            component={SalesForm}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

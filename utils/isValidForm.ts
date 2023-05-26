@@ -3,15 +3,17 @@ import { Alert } from "react-native";
 export const isValidEmail = (email: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  export const isValidImage = (email: string) => {
-    if(typeof email !== 'string') return false;
-  return(email.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi) != null);
-  }
-  
+export const isValidImage = (email: string) => {
+  if (typeof email !== "string") return false;
+  return (
+    email.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) != null
+  );
+};
 
 export const isValidPassword = (password: string) => password.length >= 6;
 
-export const isValidPrice = (precio_venta:string, precio_compra: string) => Number(precio_venta) >= Number(precio_compra);
+export const isValidPrice = (precioVenta: string, precio_compra: string) =>
+  Number(precioVenta) >= Number(precio_compra);
 
 export const isRequired = (textList: Array<string>) =>
   textList.every((text) => text.length > 0);
@@ -32,29 +34,44 @@ export const onValidFormSignXn = (email: string, password: string) => {
   return true;
 };
 
-
-export const onValidFormProduct = ({nombre, precio_venta, precio_compra, unidades, imagen}:any) => {
-  if (!isValidPrice(precio_venta, precio_compra)) {
-    Alert.alert("Error", "The Selling Price must be higher than the Purchase Price");
+export const onValidFormProduct = ({
+  nombre,
+  precioVenta,
+  precio_compra,
+  unidades,
+  imagen,
+}: any) => {
+  if (!isValidPrice(precioVenta, precio_compra)) {
+    Alert.alert(
+      "Error",
+      "The Selling Price must be higher than the Purchase Price"
+    );
     return false;
   }
   if (!isValidImage(imagen)) {
     Alert.alert("Error", "The image should be a valid link");
     return false;
   }
-  if (!isRequired([nombre, precio_venta, precio_compra, unidades,  imagen])) {
+  if (!isRequired([nombre, precioVenta, precio_compra, unidades, imagen])) {
     Alert.alert("Error", "Some fields are empty");
     return false;
   }
   return true;
 };
 
-export const onValidFormServices = ({nombre, precioVenta, costoServicio}:any) => {
+export const onValidFormServices = ({
+  nombre,
+  precioVenta,
+  costoServicio,
+}: any) => {
   if (!isValidPrice(precioVenta, costoServicio)) {
-    Alert.alert("Error", "The Selling Price must be higher than the Service Cost");
+    Alert.alert(
+      "Error",
+      "The Selling Price must be higher than the Service Cost"
+    );
     return false;
   }
-  if (!isRequired([nombre, precioVenta, costoServicio,])) {
+  if (!isRequired([nombre, precioVenta, costoServicio])) {
     Alert.alert("Error", "Some fields are empty");
     return false;
   }
